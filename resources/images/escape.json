@@ -1,0 +1,102 @@
+{"frames": {
+
+"blocks.png":
+{
+	"frame": {"x":0,"y":0,"w":59,"h":41},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":59,"h":41},
+	"sourceSize": {"w":59,"h":41},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"blocksTogether.png":
+{
+	"frame": {"x":59,"y":0,"w":68,"h":71},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":68,"h":71},
+	"sourceSize": {"w":68,"h":71},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"board.png":
+{
+	"frame": {"x":127,"y":0,"w":50,"h":39},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":39},
+	"sourceSize": {"w":50,"h":39},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"boy.png":
+{
+	"frame": {"x":177,"y":0,"w":29,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":29,"h":70},
+	"sourceSize": {"w":29,"h":70},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"chestBlocks.png":
+{
+	"frame": {"x":206,"y":0,"w":70,"h":72},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":72},
+	"sourceSize": {"w":70,"h":72},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"chestClosed.png":
+{
+	"frame": {"x":276,"y":0,"w":70,"h":49},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":49},
+	"sourceSize": {"w":70,"h":49},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"chestOpen.png":
+{
+	"frame": {"x":346,"y":0,"w":70,"h":72},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":72},
+	"sourceSize": {"w":70,"h":72},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"door.png":
+{
+	"frame": {"x":416,"y":0,"w":90,"h":154},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":90,"h":154},
+	"sourceSize": {"w":90,"h":154},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"key.png":
+{
+	"frame": {"x":0,"y":154,"w":12,"h":25},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":25},
+	"sourceSize": {"w":12,"h":25},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"room.png":
+{
+	"frame": {"x":0,"y":179,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512},
+	"anchor": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "escape.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":691},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:d69b86f39667f1d1b2496ef96fb268eb:411a21693ddec87617b253656991ac72:5ac64cf74e862e0f84f7bae31a238330$"
+}
+}
