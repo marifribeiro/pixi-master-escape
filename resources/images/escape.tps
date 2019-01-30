@@ -56,7 +56,7 @@
         <key>jxrCompressionLevel</key>
         <uint>0</uint>
         <key>ditherType</key>
-        <enum type="SettingsBase::DitherType">NearestNeighbour</enum>
+        <enum type="SettingsBase::DitherType">PngQuantLow</enum>
         <key>backgroundColor</key>
         <uint>0</uint>
         <key>libGdx</key>
@@ -88,9 +88,9 @@
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
-            <int>1024</int>
+            <int>4096</int>
             <key>height</key>
-            <int>1024</int>
+            <int>4096</int>
         </QSize>
         <key>fixedTextureSize</key>
         <QSize>
@@ -177,46 +177,37 @@
             <key>defaultPivotPoint</key>
             <point_f>0,0</point_f>
             <key>writePivotPoints</key>
-            <true/>
+            <false/>
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">bed.png</key>
+            <key type="filename">chest.png</key>
+            <key type="filename">door.png</key>
+            <key type="filename">tv.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,16,16,32</rect>
+                <key>scale9Paddings</key>
+                <rect>8,16,16,32</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">blocks.png</key>
+            <key type="filename">boy face.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>15,10,29,21</rect>
+                <rect>8,8,16,16</rect>
                 <key>scale9Paddings</key>
-                <rect>15,10,29,21</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">blocksTogether.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>17,18,34,35</rect>
-                <key>scale9Paddings</key>
-                <rect>17,18,34,35</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">board.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>13,10,25,19</rect>
-                <key>scale9Paddings</key>
-                <rect>13,10,25,19</rect>
+                <rect>8,8,16,16</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -227,49 +218,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>7,18,15,35</rect>
+                <rect>5,8,10,15</rect>
                 <key>scale9Paddings</key>
-                <rect>7,18,15,35</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">chestBlocks.png</key>
-            <key type="filename">chestOpen.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>18,18,35,36</rect>
-                <key>scale9Paddings</key>
-                <rect>18,18,35,36</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">chestClosed.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>18,12,35,25</rect>
-                <key>scale9Paddings</key>
-                <rect>18,12,35,25</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">door.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>23,39,45,77</rect>
-                <key>scale9Paddings</key>
-                <rect>23,39,45,77</rect>
+                <rect>5,8,10,15</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -280,9 +231,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>3,6,6,13</rect>
+                <rect>2,4,5,8</rect>
                 <key>scale9Paddings</key>
-                <rect>3,6,6,13</rect>
+                <rect>2,4,5,8</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -293,25 +244,52 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>128,128,256,256</rect>
+                <rect>64,64,128,128</rect>
                 <key>scale9Paddings</key>
-                <rect>128,128,256,256</rect>
+                <rect>64,64,128,128</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">table.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,24,16,48</rect>
+                <key>scale9Paddings</key>
+                <rect>8,24,16,48</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">window.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>16,8,32,16</rect>
+                <key>scale9Paddings</key>
+                <rect>16,8,32,16</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>chestBlocks.png</filename>
-            <filename>chestClosed.png</filename>
-            <filename>chestOpen.png</filename>
+            <filename>bed.png</filename>
+            <filename>blocks.png</filename>
+            <filename>boy face.png</filename>
+            <filename>boy.png</filename>
+            <filename>chest.png</filename>
             <filename>door.png</filename>
             <filename>key.png</filename>
+            <filename>table.png</filename>
+            <filename>tv.png</filename>
+            <filename>window.png</filename>
             <filename>room.png</filename>
-            <filename>blocks.png</filename>
-            <filename>blocksTogether.png</filename>
-            <filename>boy.png</filename>
-            <filename>board.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
