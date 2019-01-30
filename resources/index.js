@@ -17,9 +17,9 @@ let Application = PIXI.Application,
     
 //Create a Pixi Application
 let app = new Application({ 
-  width: 512, 
-  height: 512,                       
-  antialias: true, 
+  width: 296, 
+  height: 322,                       
+  antialias: false, 
   transparent: false, 
   resolution: 1
 });
@@ -34,7 +34,7 @@ loader
   .load(setup);
 
 //variables for functions
-let state, board, boy, blocks, blocksTogether, chest, chestClosed, chestOpen, exit, key, player, room,
+let state, windows, boy, boyFace, bed, blocksGame, blocksInventory, chest, box, exit, keyInventory, keyGame, player, room, table, tv,
     door, message, gameScene, gameOverScene, enemies, id;
 
 function setup() {
@@ -48,52 +48,94 @@ function setup() {
 
   //room
   room = new Sprite(id["room.png"]);
+  room.position.set(40, 66);
   gameScene.addChild(room);
 
   //door
   door = new Sprite(id["door.png"]);
-  door.position.set(290, 239);
+  door.position.set(227, 84);
   gameScene.addChild(door);
 
-  //key
-  key = new Sprite(id["key.png"]);
-  key.position.set(250, 250);
-  gameScene.addChild(key);
+  //bed
+  bed = new Sprite(id["bed.png"]);
+  bed.position.set(162, 115);
+  gameScene.addChild(bed);
 
-  //board
-  board = new Sprite(id["board.png"]);
-  board.position.set(230, 240);
-  gameScene.addChild(board);
+  //table
+  table = new Sprite(id["table.png"]);
+  table.position.set(256, 179);
+  gameScene.addChild(table);
+
+  //tv
+  tv = new Sprite(id["tv.png"]);
+  tv.position.set(162, 242);
+  gameScene.addChild(tv);
+
+  //key
+  keyGame = new Sprite(id["key.png"]);
+  keyGame.visible = false;
+  gameScene.addChild(keyGame);
+
+  keyInventory = new Sprite(id["key.png"]);
+  keyInventory.antialias = false;
+  keyInventory.position.set(15, 73);
+  keyInventory.width = 13;
+  keyInventory.height = 24;
+  keyInventory.visible = true;
+  gameScene.addChild(keyInventory);
+
+  //window
+  windows = new Sprite(id["windows.png"]);
+  windows.position.set(66, 84);
+  gameScene.addChild(windows);
 
   //blocks
-  blocks = new Sprite(id["blocks.png"]);
-  blocks.position.set(//definir onde vai ser a barra de inventário)
-  blocks.visible = false;
-  gameScene.addChild(blocks);
+  blocksGame = new Sprite(id["blocks.png"]);
+  blocksGame.position.set(127, 116);
+  blocksGame.visible = true;
+  gameScene.addChild(blocksGame);
 
-  blocksTogether = new Sprite(id["blocksTogether.png"]);
-  blocksTogether.position.set(230, 339);
-  gameScene.addChild(blocksTogether);
-  
+  blocksInventory = new Sprite(id["blocks.png"]);
+  blocksInventory.position.set(11, 111);
+  blocksInventory.width = 21;
+  blocksInventory.height = 21;
+  blocksInventory.visible = true;
+  gameScene.addChild(blocksInventory);
+
   //chest
-  chestClosed = new Sprite(id["chestClosed.png"]);
-  chestClosed.position.set(149, 354);
-  gameScene.addChild(chestClosed);
-  chestClosed.visible = true;
-
-  chestOpen = new Sprite(id["chestOpen.png"]);
-  chestOpen.position.set(149, 330);
-  gameScene.addChild(chestOpen);
-  chestOpen.visible = false;
+  chest = new Sprite(id["chest.png"]);
+  chest.position.set(48, 205);
+  gameScene.addChild(chest);
 
   //boy
   boy = new Sprite(id["boy.png"]);
   boy.position.set(256, 256);
-  boy.vx = 0;
-  boy.vy = 0;
   gameScene.addChild(boy);
 
   //dialog bar
+
+  //character box
+  box = new Graphics();
+  box.beginFill(0x626262);
+  box.lineStyle(3, 0xffffff, 1);
+  box.drawRect(43, 9, 50, 50);
+  box.endFill();
+  gameScene.addChild(box);
+
+  boyFace = new Sprite(id["boy face.png"]);
+  boyFace.position.set(52, 18);
+  gameScene.addChild(boyFace);
+
+  //character texts
+  let charStyle = new TextStyle({
+    fontFamily: "Courier New",
+    fontWeight: "bold",
+    fontSize: 12,
+    fill: "white"
+  });
+  message = new Text("I'm five! I can't read!", charStyle);
+  message.position.set(97, 27);
+  gameScene.addChild(message);
 
   //game over scene
   gameOverScene = new Container();
@@ -103,6 +145,7 @@ function setup() {
   //game over texts
   let style = new TextStyle({
     fontFamily: "Futura",
+    fontWeight: "bold",
     fontSize: 64,
     fill: "white"
   });
@@ -110,58 +153,6 @@ function setup() {
   message.x = 120,
   message.y = app.stage.height / 2 - 32;
   gameOverScene.addChild(message);
-
-  //keys to move boy
-  let left = keyboard("ArrowLeft"),
-      up = keyboard("ArrowUp"),
-      right = keyboard("ArrowRight"),
-      down = keyboard("ArrowDown");
-
-  //commands for boy
-  //left
-  left.press = () => { 
-  boy.vx = -5; 
-  boy.vy = 0; 
-  };
-  left.release = () => { 
-  if (!right.isDown && boy.vy === 0) { 
-  boy.vx = 0; 
-  } 
-  };
-
-  //Up
-  up.press = () => {
-  boy.vy = -5;
-  boy.vx = 0;
-  };
-  up.release = () => {
-  if (!down.isDown && boy.vx === 0) {
-    boy.vy = 0;
-  }
-  };
-
-  //Right
-  right.press = () => {
-  boy.vx = 5;
-  boy.vy = 0;
-  };
-  right.release = () => {
-  if (!left.isDown && boy.vy === 0) {
-    boy.vx = 0;
-  }
-  };
-
-  //Down
-  down.press = () => {
-  boy.vy = 5;
-  boy.vx = 0;
-  };
-  down.release = () => {
-  if (!up.isDown && boy.vx === 0) {
-    boy.vy = 0;
-
-  }
-  };
 
   state = play;
   app.ticker.add(delta => gameLoop(delta));
@@ -174,19 +165,6 @@ function gameLoop(delta){
 
 //function play
 function play(delta){
-  boy.x += boy.vx;
-  boy.y += boy.vy;
-  
-  contain(boy, {x: 2, y: 2, width: 508, height: 508});
-
-  let boyHit = false;
-
-  if(hitTestRectangle(boy, chestClosed)) {
-    chestClosed.visible = false;
-    chestOpen.visible = true;
-    blocks.visible = true;
-  };
-
 };
 
 //function end
@@ -283,35 +261,35 @@ function hitTestRectangle(r1, r2) {
 
 //funcion Keyboard
 function keyboard(value) {
-  let key = {};
-  key.value = value;
-  key.isDown = false;
-  key.isUp = true;
-  key.press = undefined;
-  key.release = undefined;
+  let keyInventory = {};
+  keyInventory.value = value;
+  keyInventory.isDown = false;
+  keyInventory.isUp = true;
+  keyInventory.press = undefined;
+  keyInventory.release = undefined;
   //The `downHandler`
-  key.downHandler = event => {
-    if (event.key === key.value) {
-      if (key.isUp && key.press) key.press();
-      key.isDown = true;
-      key.isUp = false;
+  keyInventory.downHandler = event => {
+    if (event.keyInventory === keyInventory.value) {
+      if (keyInventory.isUp && keyInventory.press) keyInventory.press();
+      keyInventory.isDown = true;
+      keyInventory.isUp = false;
       event.preventDefault();
     }
   };
 
   //The `upHandler`
-  key.upHandler = event => {
-    if (event.key === key.value) {
-      if (key.isDown && key.release) key.release();
-      key.isDown = false;
-      key.isUp = true;
+  keyInventory.upHandler = event => {
+    if (event.keyInventory === keyInventory.value) {
+      if (keyInventory.isDown && keyInventory.release) keyInventory.release();
+      keyInventory.isDown = false;
+      keyInventory.isUp = true;
       event.preventDefault();
     }
   };
 
   //Attach event listeners
-  const downListener = key.downHandler.bind(key);
-  const upListener = key.upHandler.bind(key);
+  const downListener = keyInventory.downHandler.bind(keyInventory);
+  const upListener = keyInventory.upHandler.bind(keyInventory);
   
   window.addEventListener(
     "keydown", downListener, false
@@ -321,10 +299,10 @@ function keyboard(value) {
   );
   
   // Detach event listeners
-  key.unsubscribe = () => {
+  keyInventory.unsubscribe = () => {
     window.removeEventListener("keydown", downListener);
     window.removeEventListener("keyup", upListener);
   };
   
-  return key;
+  return keyInventory;
 };
