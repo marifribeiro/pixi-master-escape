@@ -111,6 +111,15 @@ function setup() {
   blocksGame.position.set(203, 206);
   blocksGame.visible = false;
   gameScene.addChild(blocksGame);
+  t.makeInteractive(blocksGame);
+  blocksGame.press = () => {
+    if(blocksInventory.visible) {
+      blocksGame.visible = true;
+      messageGame.text = "I can see above the window from\nhere!";
+    } else {
+      messageGame.text = "I don't know what to do here."
+    };
+  };
 
   blocksInventory = new Sprite(id["blocks.png"]);
   blocksInventory.position.set(22, 222);
@@ -134,6 +143,28 @@ function setup() {
   chest.x = room.x + 16;
   chest.y = 350;
   gameScene.addChild(chest);
+  t.makeInteractive(chest);
+  chest.press = () => {
+    if(boy.x > 165) {
+       boy.vx = -1
+     } else if(boy.x < 165) {
+       boy.vx = 1;
+     } else if(boy.x = 165) {
+       boy.vx = 0;
+     };
+ 
+     if(boy.y < 380) {
+       boy.vy = 1;
+     } else if(boy.y > 380) {
+       boy.vy = -1;
+     } else if(boy.y = 380) {
+       boy.vy = 0;
+     };
+ 
+     blocksInventory.visible = true;
+     messageGame.position.set(194, 26);
+     messageGame.text = "I found my blocks!\nIf I build them high enough\nI can climb them.";
+   };
 
   //boy
   boy = new Sprite(id["boy.png"]);
@@ -201,48 +232,14 @@ function gameLoop(delta){
 
 //function play
 function play(delta){
-  t.makeInteractive(chest);
-  t.makeInteractive(blocksGame);
   boy.x += boy.vx;
   boy.y += boy.vy;
   contain(boy, {x: 80, y: 110, width: room.width, height: room.height});
-
-  chest.press = () => {
-    //boy.position.set(165, 380);
-   if(boy.x > 165) {
-      boy.vx = -1
-    } else if(boy.x < 165) {
-      boy.vx = 1;
-    } else if(boy.x = 165) {
-      boy.vx = 0;
-    };
-
-    if(boy.y < 380) {
-      boy.vy = 1;
-    } else if(boy.y > 380) {
-      boy.vy = -1;
-    } else if(boy.y = 380) {
-      boy.vy = 0;
-    };
-
-    blocksInventory.visible = true;
-    messageGame.position.set(194, 26);
-    messageGame.text = "I found my blocks!\nIf I build them high enough\nI can climb them.";
-  };
 
   if(hitTestRectangle(boy, chest)) {
     boy.vx = 0;
     boy.vy = 0;
   };
-
-  blocksGame.press = () => {
-    if(blocksInventory.visible) {
-      blocksGame.visible = true;
-      messageGame.text = "I can see above the window from\nhere!";
-    } else {
-      messageGame.text = "I don't know what to do here."
-    };
-  }
 };
 
 //function end
