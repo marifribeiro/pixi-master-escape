@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.11.1</string>
+        <string>4.12.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -56,7 +56,7 @@
         <key>jxrCompressionLevel</key>
         <uint>0</uint>
         <key>ditherType</key>
-        <enum type="SettingsBase::DitherType">PngQuantLow</enum>
+        <enum type="SettingsBase::DitherType">NearestNeighbour</enum>
         <key>backgroundColor</key>
         <uint>0</uint>
         <key>libGdx</key>
@@ -88,9 +88,9 @@
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
-            <int>4096</int>
+            <int>8192</int>
             <key>height</key>
-            <int>4096</int>
+            <int>8192</int>
         </QSize>
         <key>fixedTextureSize</key>
         <QSize>
@@ -191,23 +191,22 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>8,16,16,32</rect>
+                <rect>80,160,160,320</rect>
                 <key>scale9Paddings</key>
-                <rect>8,16,16,32</rect>
+                <rect>80,160,160,320</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
             <key type="filename">blocks.png</key>
-            <key type="filename">boy face.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>8,8,16,16</rect>
+                <rect>80,80,160,160</rect>
                 <key>scale9Paddings</key>
-                <rect>8,8,16,16</rect>
+                <rect>80,80,160,160</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -218,9 +217,22 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>5,8,10,15</rect>
+                <rect>50,78,100,155</rect>
                 <key>scale9Paddings</key>
-                <rect>5,8,10,15</rect>
+                <rect>50,78,100,155</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">boyFace.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>90,90,180,180</rect>
+                <key>scale9Paddings</key>
+                <rect>90,90,180,180</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -231,9 +243,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>2,4,5,8</rect>
+                <rect>23,40,45,80</rect>
                 <key>scale9Paddings</key>
-                <rect>2,4,5,8</rect>
+                <rect>23,40,45,80</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -244,9 +256,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>64,64,128,128</rect>
+                <rect>640,640,1280,1280</rect>
                 <key>scale9Paddings</key>
-                <rect>64,64,128,128</rect>
+                <rect>640,640,1280,1280</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -257,9 +269,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>8,24,16,48</rect>
+                <rect>80,240,160,480</rect>
                 <key>scale9Paddings</key>
-                <rect>8,24,16,48</rect>
+                <rect>80,240,160,480</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -270,33 +282,35 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>16,8,32,16</rect>
+                <rect>160,80,320,160</rect>
                 <key>scale9Paddings</key>
-                <rect>16,8,32,16</rect>
+                <rect>160,80,320,160</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>bed.png</filename>
-            <filename>blocks.png</filename>
-            <filename>boy face.png</filename>
             <filename>boy.png</filename>
+            <filename>boyFace.png</filename>
             <filename>chest.png</filename>
             <filename>door.png</filename>
             <filename>key.png</filename>
+            <filename>room.png</filename>
             <filename>table.png</filename>
             <filename>tv.png</filename>
             <filename>window.png</filename>
-            <filename>room.png</filename>
+            <filename>bed.png</filename>
+            <filename>blocks.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
         <key>replaceList</key>
         <array/>
         <key>ignoredWarnings</key>
-        <array/>
+        <array>
+            <string>large-max-texture-size</string>
+        </array>
         <key>commonDivisorX</key>
         <uint>1</uint>
         <key>commonDivisorY</key>
