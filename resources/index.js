@@ -17,12 +17,16 @@ let Application = PIXI.Application,
     
 //Create a Pixi Application
 let app = new Application({ 
-  width: 296, 
-  height: 322,                       
+  width: 592, 
+  height: 644,                       
   antialias: false, 
   transparent: false, 
   resolution: 1
 });
+
+//tink 
+let t = new Tink(PIXI, app.renderer.view),
+    pointer = t.makePointer();
 
 //Add the canvas that Pixi automatically created for you to the HTML document
 document.body.appendChild(app.view);
@@ -48,68 +52,96 @@ function setup() {
 
   //room
   room = new Sprite(id["room.png"]);
-  room.position.set(40, 66);
+  room.position.set(80, 110);
+  room.width = room.width / 5;
+  room.height = room.height / 5;
   gameScene.addChild(room);
 
   //door
   door = new Sprite(id["door.png"]);
-  door.position.set(227, 84);
+  door.width = door.width / 5;
+  door.height = door.height / 5;
+  door.x = (room.x + room.width) - (door.width * 2);
+  door.y = 146;
   gameScene.addChild(door);
 
   //bed
   bed = new Sprite(id["bed.png"]);
-  bed.position.set(162, 115);
+  bed.width = bed.width / 5;
+  bed.height = bed.height / 5;
+  bed.x = (room.x + room.width) / 2;
+  bed.y = 215;
   gameScene.addChild(bed);
 
   //table
   table = new Sprite(id["table.png"]);
-  table.position.set(256, 179);
+  table.width = table.width / 5;
+  table.height = table.height / 5;
+  table.x = (room.x + room.width) - (table.width + 16);
+  table.y = (room.y + room.height) - (table.height + 32);
   gameScene.addChild(table);
 
   //tv
   tv = new Sprite(id["tv.png"]);
-  tv.position.set(162, 242);
+  tv.width = tv.width / 5;
+  tv.height = tv.height / 5;
+  tv.x = (room.x + room.width) / 2;
+  tv.y = (room.y + room.height) - (tv.height + 32)
   gameScene.addChild(tv);
 
   //key
   keyGame = new Sprite(id["key.png"]);
   keyGame.visible = false;
+  keyGame.width = keyGame.width / 5;
+  keyGame.height = keyGame.height / 5;
   gameScene.addChild(keyGame);
 
   keyInventory = new Sprite(id["key.png"]);
   keyInventory.antialias = false;
-  keyInventory.position.set(15, 73);
-  keyInventory.width = 13;
-  keyInventory.height = 24;
-  keyInventory.visible = true;
+  keyInventory.position.set(30, 146);
+  keyInventory.width = 26;
+  keyInventory.height = 48;
+  keyInventory.visible = false;
   gameScene.addChild(keyInventory);
-
-  //window
-  windows = new Sprite(id["windows.png"]);
-  windows.position.set(66, 84);
-  gameScene.addChild(windows);
 
   //blocks
   blocksGame = new Sprite(id["blocks.png"]);
-  blocksGame.position.set(127, 116);
-  blocksGame.visible = true;
+  blocksGame.width = blocksGame.width / 5;
+  blocksGame.height = blocksGame.height / 5;
+  blocksGame.position.set(203, 206);
+  blocksGame.visible = false;
   gameScene.addChild(blocksGame);
 
   blocksInventory = new Sprite(id["blocks.png"]);
-  blocksInventory.position.set(11, 111);
-  blocksInventory.width = 21;
-  blocksInventory.height = 21;
-  blocksInventory.visible = true;
+  blocksInventory.position.set(22, 222);
+  blocksInventory.width = 42;
+  blocksInventory.height = 42;
+  blocksInventory.visible = false;
   gameScene.addChild(blocksInventory);
+
+  //window
+  windows = new Sprite(id["windows.png"]);
+  windows.width = windows.width / 5;
+  windows.height = windows.height / 5;
+  windows.x = 140;
+  windows.y = (blocksGame.y - windows.height) + 2;
+  gameScene.addChild(windows);
 
   //chest
   chest = new Sprite(id["chest.png"]);
-  chest.position.set(48, 205);
+  chest.width = chest.width / 5;
+  chest.height = chest.height / 5;
+  chest.x = room.x + 16;
+  chest.y = 350;
   gameScene.addChild(chest);
 
   //boy
   boy = new Sprite(id["boy.png"]);
-  boy.position.set(256, 256);
+  boy.position.set(260, 260);
+  boy.width = boy.width / 5;
+  boy.height = boy.height / 5;
+  boy.vx = 0;
+  boy.vy = 0;
   gameScene.addChild(boy);
 
   //dialog bar
@@ -118,24 +150,27 @@ function setup() {
   box = new Graphics();
   box.beginFill(0x626262);
   box.lineStyle(3, 0xffffff, 1);
-  box.drawRect(43, 9, 50, 50);
+  box.drawRect(86, 10, 90, 90);
   box.endFill();
   gameScene.addChild(box);
 
-  boyFace = new Sprite(id["boy face.png"]);
-  boyFace.position.set(52, 18);
+  boyFace = new Sprite(id["boyFace.png"]);
+  boyFace.position.set(95, 20);
+  boyFace.width = boyFace.width / 5;
+  boyFace.height = boyFace.height / 5;
   gameScene.addChild(boyFace);
 
   //character texts
   let charStyle = new TextStyle({
     fontFamily: "Courier New",
     fontWeight: "bold",
-    fontSize: 12,
+    fontSize: 20,
     fill: "white"
   });
-  message = new Text("I'm five! I can't read!", charStyle);
-  message.position.set(97, 27);
-  gameScene.addChild(message);
+  messageGame = new Text("I need to get out of the room!", charStyle);
+  messageGame.position.set(194, 56);
+  messageGame.wordWrap = true;
+  gameScene.addChild(messageGame);
 
   //game over scene
   gameOverScene = new Container();
@@ -161,10 +196,53 @@ function setup() {
 //function game loop
 function gameLoop(delta){
   state(delta);
+  t.update();
 };
 
 //function play
 function play(delta){
+  t.makeInteractive(chest);
+  t.makeInteractive(blocksGame);
+  boy.x += boy.vx;
+  boy.y += boy.vy;
+  contain(boy, {x: 80, y: 110, width: room.width, height: room.height});
+
+  chest.press = () => {
+    //boy.position.set(165, 380);
+   if(boy.x > 165) {
+      boy.vx = -1
+    } else if(boy.x < 165) {
+      boy.vx = 1;
+    } else if(boy.x = 165) {
+      boy.vx = 0;
+    };
+
+    if(boy.y < 380) {
+      boy.vy = 1;
+    } else if(boy.y > 380) {
+      boy.vy = -1;
+    } else if(boy.y = 380) {
+      boy.vy = 0;
+    };
+
+    blocksInventory.visible = true;
+    messageGame.position.set(194, 26);
+    messageGame.text = "I found my blocks!\nIf I build them high enough\nI can climb them.";
+  };
+
+  if(hitTestRectangle(boy, chest)) {
+    boy.vx = 0;
+    boy.vy = 0;
+  };
+
+  blocksGame.press = () => {
+    if(blocksInventory.visible) {
+      blocksGame.visible = true;
+      messageGame.text = "I can see above the window from\nhere!";
+    } else {
+      messageGame.text = "I don't know what to do here."
+    };
+  }
 };
 
 //function end
