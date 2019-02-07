@@ -39,7 +39,7 @@ loader
 
 //variables for functions
 let state, windows, boy, boyFace, bed, blocksGame, blocksInventory, chest, box, exit, keyInventory, keyGame, player, room, table, tv,
-    door, message, gameScene, gameOverScene, enemies, id;
+    door, message, gameScene, gameOverScene, enemies, id, clickX, clickY;
 
 function setup() {
   //game scene
@@ -55,6 +55,8 @@ function setup() {
   room.position.set(80, 110);
   room.width = room.width / 5;
   room.height = room.height / 5;
+  room.interactive = true;
+  room.on('mousedown', moveme);
   gameScene.addChild(room);
 
   //door
@@ -95,6 +97,14 @@ function setup() {
   keyGame.width = keyGame.width / 5;
   keyGame.height = keyGame.height / 5;
   gameScene.addChild(keyGame);
+  t.makeInteractive(keyGame);
+  keyGame.press = () => {
+    if(blocksGame.visible && keyInventory.visible) {
+      keyGame.visible = true;
+      keyGame.x = boy.x - 10;
+      keyGame.y = boy.y;
+    };
+  } 
 
   keyInventory = new Sprite(id["key.png"]);
   keyInventory.antialias = false;
@@ -115,6 +125,7 @@ function setup() {
   blocksGame.press = () => {
     if(blocksInventory.visible) {
       blocksGame.visible = true;
+      boy.position.set(203, 220);
       messageGame.text = "I can see above the window from\nhere!";
     } else {
       messageGame.text = "I don't know what to do here."
@@ -145,25 +156,11 @@ function setup() {
   gameScene.addChild(chest);
   t.makeInteractive(chest);
   chest.press = () => {
-    if(boy.x > 165) {
-       boy.vx = -1
-     } else if(boy.x < 165) {
-       boy.vx = 1;
-     } else if(boy.x = 165) {
-       boy.vx = 0;
-     };
- 
-     if(boy.y < 380) {
-       boy.vy = 1;
-     } else if(boy.y > 380) {
-       boy.vy = -1;
-     } else if(boy.y = 380) {
-       boy.vy = 0;
-     };
- 
+     if(hitTestRectangle(boy, chest)) {
      blocksInventory.visible = true;
      messageGame.position.set(194, 26);
      messageGame.text = "I found my blocks!\nIf I build them high enough\nI can climb them.";
+     };
    };
 
   //boy
@@ -234,12 +231,24 @@ function gameLoop(delta){
 function play(delta){
   boy.x += boy.vx;
   boy.y += boy.vy;
-  contain(boy, {x: 80, y: 110, width: room.width, height: room.height});
-
-  if(hitTestRectangle(boy, chest)) {
+  contain(boy, {x: 96, y: 215, width: 576, height: 590});
+  
+  //move boy
+  if(boy.x > clickX) {
+    boy.vx = -1;
+  } else if(boy.x < clickX) {
+    boy.vx = 1;
+  } else {
     boy.vx = 0;
+  }
+
+  if(boy.y > clickY) {
+    boy.vy = -1;
+  } else if(boy.y < clickY) {
+    boy.vy = 1;
+  } else {
     boy.vy = 0;
-  };
+  }
 };
 
 //function end
@@ -249,6 +258,12 @@ function end() {
 }
 
 // HELPER FUNCTIONS 
+
+//function move me
+function moveme(xx) {
+ clickX = xx.data.global.x;
+ clickY = xx.data.global.y;
+}
 
 //function contain
 function contain(sprite, container) {
