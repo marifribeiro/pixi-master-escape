@@ -1,32 +1,32 @@
 //Aliases
 
 let Application = PIXI.Application,
-    base = PIXI.BaseTexture,
-    Container = PIXI.Container,
-    Graphics = PIXI.Graphics,
-    loader = PIXI.loader,
-    ParticleContainer = PIXI.particles.ParticleContainer,
-    Rectangle = PIXI.Rectangle,
-    reset = PIXI.loader.reset,
-    resources = PIXI.loader.resources,
-    Sprite = PIXI.Sprite,
-    Text = PIXI.Text,
-    TextStyle = PIXI.TextStyle,
-    texture = PIXI.Texture,
-    TextureCache = PIXI.utils.TextureCache;
-    
+  base = PIXI.BaseTexture,
+  Container = PIXI.Container,
+  Graphics = PIXI.Graphics,
+  loader = PIXI.loader,
+  ParticleContainer = PIXI.particles.ParticleContainer,
+  Rectangle = PIXI.Rectangle,
+  reset = PIXI.loader.reset,
+  resources = PIXI.loader.resources,
+  Sprite = PIXI.Sprite,
+  Text = PIXI.Text,
+  TextStyle = PIXI.TextStyle,
+  texture = PIXI.Texture,
+  TextureCache = PIXI.utils.TextureCache;
+
 //Create a Pixi Application
-let app = new Application({ 
-  width: 592, 
-  height: 644,                       
-  antialias: false, 
-  transparent: false, 
+let app = new Application({
+  width: 592,
+  height: 644,
+  antialias: false,
+  transparent: false,
   resolution: 1
 });
 
 //tink 
 let t = new Tink(PIXI, app.renderer.view),
-    pointer = t.makePointer();
+  pointer = t.makePointer();
 
 //Add the canvas that Pixi automatically created for you to the HTML document
 document.body.appendChild(app.view);
@@ -39,7 +39,7 @@ loader
 
 //variables for functions
 let state, windows, boy, boyFace, bed, blocksGame, blocksInventory, chest, box, exit, keyInventory, keyGame, player, room, table, tv,
-    door, message, gameScene, gameOverScene, enemies, id, clickX, clickY;
+  door, message, gameScene, gameOverScene, enemies, id, clickX, clickY;
 
 function setup() {
   //game scene
@@ -99,12 +99,12 @@ function setup() {
   gameScene.addChild(keyGame);
   t.makeInteractive(keyGame);
   keyGame.press = () => {
-    if(blocksGame.visible && keyInventory.visible) {
+    if (blocksGame.visible && keyInventory.visible) {
       keyGame.visible = true;
       keyGame.x = boy.x - 10;
       keyGame.y = boy.y;
     };
-  } 
+  }
 
   keyInventory = new Sprite(id["key.png"]);
   keyInventory.antialias = false;
@@ -123,7 +123,7 @@ function setup() {
   gameScene.addChild(blocksGame);
   t.makeInteractive(blocksGame);
   blocksGame.press = () => {
-    if(blocksInventory.visible) {
+    if (blocksInventory.visible) {
       blocksGame.visible = true;
       boy.position.set(203, 220);
       messageGame.text = "I can see above the window from\nhere!";
@@ -155,13 +155,6 @@ function setup() {
   chest.y = 350;
   gameScene.addChild(chest);
   t.makeInteractive(chest);
-  chest.press = () => {
-     if(hitTestRectangle(boy, chest)) {
-     blocksInventory.visible = true;
-     messageGame.position.set(194, 26);
-     messageGame.text = "I found my blocks!\nIf I build them high enough\nI can climb them.";
-     };
-   };
 
   //boy
   boy = new Sprite(id["boy.png"]);
@@ -214,7 +207,7 @@ function setup() {
   });
   message = new Text("The End!", style);
   message.x = 120,
-  message.y = app.stage.height / 2 - 32;
+    message.y = app.stage.height / 2 - 32;
   gameOverScene.addChild(message);
 
   state = play;
@@ -222,32 +215,44 @@ function setup() {
 };
 
 //function game loop
-function gameLoop(delta){
+function gameLoop(delta) {
   state(delta);
   t.update();
 };
-
+let hitChest = false;
 //function play
-function play(delta){
+function play(delta) {
   boy.x += boy.vx;
   boy.y += boy.vy;
-  contain(boy, {x: 96, y: 215, width: 576, height: 590});
+  contain(boy, { x: 96, y: 215, width: 576, height: 590 });
   
   //move boy
-  if(boy.x > clickX) {
+  if (boy.x > clickX) {
     boy.vx = -1;
-  } else if(boy.x < clickX) {
+  } else if (boy.x < clickX) {
     boy.vx = 1;
   } else {
     boy.vx = 0;
   }
-
-  if(boy.y > clickY) {
+  
+  if (boy.y > clickY) {
     boy.vy = -1;
-  } else if(boy.y < clickY) {
+  } else if (boy.y < clickY) {
     boy.vy = 1;
   } else {
     boy.vy = 0;
+  }
+  
+  if (hitTestRectangle(boy, chest)) {
+    boy.vx = 0;
+    boy.vy = 0;
+    boy.x = boy.x + 1;
+    boy.y = boy.y + 1;
+    hitChest = true;
+
+    blocksInventory.visible = true;
+    messageGame.position.set(194, 26);
+    messageGame.text = "I found my blocks!\nIf I build them high enough\nI can climb them.";
   }
 };
 
@@ -261,8 +266,8 @@ function end() {
 
 //function move me
 function moveme(xx) {
- clickX = xx.data.global.x;
- clickY = xx.data.global.y;
+  clickX = xx.data.global.x;
+  clickY = xx.data.global.y;
 }
 
 //function contain
@@ -305,8 +310,8 @@ function randomInt(min, max) {
 
 //loader function. Logs the loaded sprites
 function loadProgressHandler(loader, resource) {
-  console.log("loading: " + resource.url); 
-  console.log("progress: " + loader.progress + "%"); 
+  console.log("loading: " + resource.url);
+  console.log("progress: " + loader.progress + "%");
 };
 
 //function hit
@@ -316,10 +321,10 @@ function hitTestRectangle(r1, r2) {
   //hit will determine whether there's a collision
   hit = false;
   //Find the center points of each sprite
-  r1.centerX = r1.x + r1.width / 2; 
-  r1.centerY = r1.y + r1.height / 2; 
-  r2.centerX = r2.x + r2.width / 2; 
-  r2.centerY = r2.y + r2.height / 2; 
+  r1.centerX = r1.x + r1.width / 2;
+  r1.centerY = r1.y + r1.height / 2;
+  r2.centerX = r2.x + r2.width / 2;
+  r2.centerY = r2.y + r2.height / 2;
   //Find the half-widths and half-heights of each sprite
   r1.halfWidth = r1.width / 2;
   r1.halfHeight = r1.height / 2;
@@ -380,19 +385,19 @@ function keyboard(value) {
   //Attach event listeners
   const downListener = keyInventory.downHandler.bind(keyInventory);
   const upListener = keyInventory.upHandler.bind(keyInventory);
-  
+
   window.addEventListener(
     "keydown", downListener, false
   );
   window.addEventListener(
     "keyup", upListener, false
   );
-  
+
   // Detach event listeners
   keyInventory.unsubscribe = () => {
     window.removeEventListener("keydown", downListener);
     window.removeEventListener("keyup", upListener);
   };
-  
+
   return keyInventory;
 };
