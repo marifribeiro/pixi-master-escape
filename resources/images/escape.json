@@ -22,7 +22,8 @@
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":200,"h":310},
-	"sourceSize": {"w":200,"h":310}
+	"sourceSize": {"w":200,"h":310},
+	"pivot": {"x": 0.5,"y":0.5}
 },
 "boyFace.png":
 {
