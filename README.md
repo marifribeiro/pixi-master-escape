@@ -8,10 +8,10 @@ Help him out by using your mouse to click wherever you want the little kid to go
 
 To know more about Pixi.js go to [github.com/kittykatattack/learningPixi](https://github.com/kittykatattack/learningPixi)
 
-# Access
+## Access
 You can access the game at [pixi-master-escape.herokuapp](https://pixi-master-escape.herokuapp.com/)
 
-# Run
+## Run
 If you want to run this game at your computer, you will need [npm](https://www.npmjs.com/get-npm) installed.
 Once you installed, run the following commands:
 
