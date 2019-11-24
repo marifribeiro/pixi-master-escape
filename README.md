@@ -1,3 +1,9 @@
+# Escape in Pixi.js
+
+## Introduction
+
+This is a small project of a escape game entirely constructed by me in Pixi.js
+
 # Run
 `node server.js`
 
