@@ -16,7 +16,9 @@ If you want to run this game at your computer, you will need [npm](https://www.n
 Once you installed, run the following commands:
 
 To install the dependecies of this project:
+
 `npm install`
 
 To run the server on your computer:
+
 `node server.js`
